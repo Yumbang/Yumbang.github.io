@@ -1,0 +1,208 @@
+<!-- Math Rendering with MathJax 3 -->
+<!-- Only loaded on pages with math: true in front matter -->
+{% if page.math %}
+<script>
+  // MathJax 3 Configuration
+  // This must be defined BEFORE loading MathJax
+  window.MathJax = {
+    tex: {
+      // Enable inline math with $...$ and display math with $$...$$
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+
+      // Process escaped dollar signs correctly
+      processEscapes: true,
+
+      // Allow line breaks in equations
+      processEnvironments: true,
+
+      // Common LaTeX packages and extensions
+      packages: {
+        '[+]': ['ams', 'newcommand', 'configmacros', 'action']
+      },
+
+      // Common macros for convenience
+      macros: {
+        RR: "\\mathbb{R}",
+        NN: "\\mathbb{N}",
+        ZZ: "\\mathbb{Z}",
+        QQ: "\\mathbb{Q}",
+        CC: "\\mathbb{C}",
+        abs: ["\\left\\lvert #1 \\right\\rvert", 1],
+        norm: ["\\left\\lVert #1 \\right\\rVert", 1],
+        set: ["\\left\\{ #1 \\right\\}", 1],
+        bra: ["\\left\\langle #1 \\right\\rvert", 1],
+        ket: ["\\left\\lvert #1 \\right\\rangle", 1],
+        braket: ["\\left\\langle #1 \\middle\\vert #2 \\right\\rangle", 2]
+      }
+    },
+
+    // Output options
+    svg: {
+      // Use SVG output for best quality and accessibility
+      fontCache: 'global',
+      scale: 1,
+      minScale: 0.5,
+      matchFontHeight: true,
+      mtextInheritFont: true,
+      merrorInheritFont: true,
+      mathmlSpacing: false,
+      skipAttributes: {},
+      exFactor: 0.5,
+      displayAlign: 'center',
+      displayIndent: '0'
+    },
+
+    // Accessibility options
+    options: {
+      // Enable assistive-mml for screen readers
+      enableMenu: true,
+      menuOptions: {
+        settings: {
+          assistiveMml: true,
+          collapsible: false,
+          explorer: true
+        }
+      },
+
+      // Skip rendering on elements with specific classes
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+
+      // Process only math in specific containers (performance)
+      processHtmlClass: 'math-enabled',
+
+      // Ignore math in these classes
+      ignoreHtmlClass: 'no-math'
+    },
+
+    // Loader options for performance
+    loader: {
+      load: ['[tex]/ams', '[tex]/newcommand', '[tex]/configmacros', '[tex]/action']
+    },
+
+    // Startup options
+    startup: {
+      // Elements to process on startup
+      elements: null,
+
+      // Typeset when DOM is ready
+      typeset: true,
+
+      // Ready function - can be used for custom initialization
+      ready: function() {
+        MathJax.startup.defaultReady();
+        console.log('MathJax 3 loaded and ready');
+      }
+    }
+  };
+</script>
+
+<!-- Load MathJax 3 from CDN -->
+<!-- Using Cloudflare CDN for reliability and performance -->
+<!-- Async loading to prevent blocking page render -->
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+  integrity="sha384-te69Cjq9dJiG9eU5/lLN1qoRDOTWTj6dNYZKbPqmLs0r83Eo8Bc7FmLXWg/NM9kz"
+  crossorigin="anonymous">
+</script>
+
+<!-- Fallback: Load from alternative CDN if primary fails -->
+<script>
+  // Check if MathJax loaded successfully after 5 seconds
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      if (typeof MathJax === 'undefined' || !MathJax.version) {
+        console.warn('Primary MathJax CDN failed, loading from fallback...');
+        var script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js';
+        script.async = true;
+        script.integrity = 'sha512-9DkJEmXbL/Tdj8b1SxJ0KdMhHH3bVqN1Cc7H8NVLNVJvQFXLrNKhVGHLYwLGlBdVKPfLLrKZPnpYCkCJJLKfOQ==';
+        script.crossorigin = 'anonymous';
+        document.head.appendChild(script);
+      }
+    }, 5000);
+  });
+</script>
+
+<!-- Styling for math elements -->
+<style>
+  /* Ensure math displays don't overflow on mobile */
+  mjx-container[display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+  }
+
+  /* Center display math */
+  mjx-container[display="true"] {
+    margin: 1em 0;
+    text-align: center;
+  }
+
+  /* Ensure inline math aligns with text */
+  mjx-container[jax="SVG"] {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* Prevent math from being selected during copy-paste unless intended */
+  mjx-container {
+    user-select: text;
+  }
+
+  /* Loading indicator - hide until MathJax processes */
+  .math-loading {
+    opacity: 0.3;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Math is ready */
+  .math-ready {
+    opacity: 1;
+  }
+
+  /* Responsive math - scale down on very small screens if needed */
+  @media (max-width: 480px) {
+    mjx-container[display="true"] {
+      font-size: 90%;
+    }
+  }
+
+  /* Dark mode support - inherit text color */
+  mjx-container svg {
+    color: inherit;
+  }
+
+  /* Ensure math doesn't break layout */
+  mjx-container {
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+
+  /* Accessibility: Hide assistive MathML from visual display */
+  mjx-assistive-mml {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+  }
+</style>
+
+<!-- Performance monitoring (optional - remove in production if not needed) -->
+<script>
+  if (typeof window.MathJax !== 'undefined') {
+    // Log rendering performance
+    window.addEventListener('load', function() {
+      if (MathJax.startup && MathJax.startup.promise) {
+        MathJax.startup.promise.then(function() {
+          console.log('MathJax rendering complete');
+        });
+      }
+    });
+  }
+</script>
+
+{% endif %}

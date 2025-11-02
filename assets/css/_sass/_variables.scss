@@ -1,0 +1,111 @@
+// Color Palette
+// Primary colors for branding and key UI elements
+$color-primary: #2563eb;
+$color-primary-dark: #1e40af;
+$color-primary-light: #60a5fa;
+
+// Neutral colors for backgrounds and borders
+$color-dark: #1e293b;
+$color-light: #f8fafc;
+$color-gray-100: #f1f5f9;
+$color-gray-200: #e2e8f0;
+$color-gray-300: #cbd5e1;
+$color-gray-400: #94a3b8;
+$color-gray-500: #64748b;
+$color-gray-600: #475569;
+$color-gray-700: #334155;
+
+// Semantic colors
+$color-text: #1e293b;
+$color-text-light: #64748b;
+$color-background: #ffffff;
+$color-background-alt: #f8fafc;
+$color-border: #e2e8f0;
+
+// Accent colors
+$color-accent: #0ea5e9;
+$color-success: #10b981;
+$color-warning: #f59e0b;
+$color-error: #ef4444;
+
+// Code syntax highlighting colors (Rouge/GitHub style)
+$color-code-bg: #f6f8fa;
+$color-code-border: #e1e4e8;
+$color-code-text: #24292e;
+
+// Typography
+// System font stack for fast loading and native feel
+$font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+// Font sizes (mobile-first)
+$font-size-base: 16px;
+$font-size-small: 0.875rem;
+$font-size-tiny: 0.75rem;
+$font-size-large: 1.125rem;
+
+// Heading sizes (fluid typography)
+$font-size-h1: 2rem;     // 32px
+$font-size-h2: 1.75rem;  // 28px
+$font-size-h3: 1.5rem;   // 24px
+$font-size-h4: 1.25rem;  // 20px
+$font-size-h5: 1.125rem; // 18px
+$font-size-h6: 1rem;     // 16px
+
+// Line heights
+$line-height-base: 1.7;
+$line-height-heading: 1.3;
+$line-height-tight: 1.4;
+
+// Font weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing Scale
+// Based on 8px base unit for consistency
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+
+// Layout
+$max-width-content: 800px;
+$max-width-narrow: 680px;
+$max-width-wide: 1200px;
+
+// Responsive breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Borders
+$border-radius-sm: 0.25rem;  // 4px
+$border-radius-md: 0.5rem;   // 8px
+$border-radius-lg: 0.75rem;  // 12px
+$border-width: 1px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Transitions
+$transition-fast: 150ms ease-in-out;
+$transition-base: 250ms ease-in-out;
+$transition-slow: 350ms ease-in-out;
+
+// Z-index layers
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal: 1040;
+$z-index-popover: 1050;
+$z-index-tooltip: 1060;

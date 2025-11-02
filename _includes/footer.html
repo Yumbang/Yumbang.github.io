@@ -1,0 +1,30 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="footer-text">
+        &copy; {{ 'now' | date: "%Y" }} {{ site.author }}. {{ site.footer_text }}
+      </p>
+
+      <div class="footer-links">
+        {% if site.social.links %}
+          {% for link in site.social.links %}
+            {% assign link_parts = link | split: '/' %}
+            {% assign domain = link_parts[2] %}
+
+            {% if domain contains 'github' %}
+              <a href="{{ link }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+            {% elsif domain contains 'twitter' %}
+              <a href="{{ link }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">Twitter</a>
+            {% elsif domain contains 'linkedin' %}
+              <a href="{{ link }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+            {% else %}
+              <a href="{{ link }}" target="_blank" rel="noopener noreferrer">Link</a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        <a href="{{ '/feed.xml' | relative_url }}" aria-label="RSS Feed">RSS</a>
+      </div>
+    </div>
+  </div>
+</footer>

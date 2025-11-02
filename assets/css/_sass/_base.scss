@@ -1,0 +1,321 @@
+// Base Typography and Element Styles
+
+html {
+  font-size: $font-size-base;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-serif;
+  font-weight: $font-weight-normal;
+  color: $color-text;
+  background-color: $color-background;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-primary;
+  color: $color-dark;
+  margin-bottom: $spacing-md;
+  margin-top: $spacing-xl;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+h1 {
+  font-size: $font-size-h1;
+  font-weight: $font-weight-bold;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: $font-size-h2;
+  font-weight: $font-weight-bold;
+}
+
+h3 {
+  font-size: $font-size-h3;
+  font-weight: $font-weight-semibold;
+}
+
+h4 {
+  font-size: $font-size-h4;
+  font-weight: $font-weight-semibold;
+}
+
+h5 {
+  font-size: $font-size-h5;
+  font-weight: $font-weight-medium;
+}
+
+h6 {
+  font-size: $font-size-h6;
+  font-weight: $font-weight-medium;
+  color: $color-text-light;
+}
+
+// Paragraphs
+p {
+  margin-bottom: $spacing-lg;
+  line-height: $line-height-base;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links
+a {
+  color: $color-primary;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-primary-dark;
+    text-decoration-color: currentColor;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+  }
+}
+
+// Lists
+ul, ol {
+  list-style: initial;
+  padding-left: $spacing-xl;
+  margin-bottom: $spacing-lg;
+
+  li {
+    margin-bottom: $spacing-sm;
+    line-height: $line-height-base;
+  }
+
+  ul, ol {
+    margin-top: $spacing-sm;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+// Blockquotes
+blockquote {
+  margin: $spacing-xl 0;
+  padding: $spacing-md $spacing-lg;
+  border-left: 4px solid $color-primary;
+  background-color: $color-gray-100;
+  font-style: italic;
+  color: $color-gray-700;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  cite {
+    display: block;
+    margin-top: $spacing-md;
+    font-size: $font-size-small;
+    font-style: normal;
+    color: $color-text-light;
+
+    &::before {
+      content: "— ";
+    }
+  }
+}
+
+// Horizontal rules
+hr {
+  margin: $spacing-2xl 0;
+  border: 0;
+  border-top: 2px solid $color-border;
+}
+
+// Inline code
+code {
+  padding: 0.125rem 0.375rem;
+  background-color: $color-code-bg;
+  border: 1px solid $color-code-border;
+  border-radius: $border-radius-sm;
+  font-size: 0.9em;
+  color: $color-code-text;
+  font-weight: $font-weight-normal;
+}
+
+// Code blocks (will be overridden by syntax highlighting)
+pre {
+  margin: $spacing-xl 0;
+  padding: $spacing-lg;
+  background-color: $color-code-bg;
+  border: 1px solid $color-code-border;
+  border-radius: $border-radius-md;
+  overflow-x: auto;
+  font-size: $font-size-small;
+  line-height: $line-height-tight;
+
+  code {
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: inherit;
+  }
+}
+
+// Keyboard input
+kbd {
+  padding: 0.125rem 0.375rem;
+  background-color: $color-dark;
+  color: $color-light;
+  border-radius: $border-radius-sm;
+  font-size: 0.875em;
+  font-weight: $font-weight-semibold;
+  box-shadow: $shadow-sm;
+}
+
+// Abbreviations
+abbr[title] {
+  cursor: help;
+  text-decoration: underline dotted;
+  text-decoration-color: $color-gray-400;
+}
+
+// Mark/Highlight
+mark {
+  background-color: #fef08a;
+  color: $color-text;
+  padding: 0.125rem 0.25rem;
+  border-radius: $border-radius-sm;
+}
+
+// Tables
+table {
+  width: 100%;
+  margin: $spacing-xl 0;
+  border-collapse: collapse;
+  font-size: $font-size-small;
+
+  thead {
+    background-color: $color-gray-100;
+
+    th {
+      font-weight: $font-weight-semibold;
+      text-align: left;
+    }
+  }
+
+  th, td {
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $color-border;
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background-color: $color-background-alt;
+    }
+
+    tr:hover {
+      background-color: $color-gray-100;
+    }
+  }
+}
+
+// Images
+img {
+  margin: $spacing-xl auto;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+}
+
+// Figures
+figure {
+  margin: $spacing-xl 0;
+
+  img {
+    margin: 0 auto $spacing-md;
+  }
+
+  figcaption {
+    text-align: center;
+    font-size: $font-size-small;
+    color: $color-text-light;
+    font-style: italic;
+  }
+}
+
+// Details/Summary
+details {
+  margin: $spacing-lg 0;
+  padding: $spacing-md;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+  background-color: $color-background-alt;
+
+  summary {
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &[open] summary {
+    margin-bottom: $spacing-md;
+  }
+}
+
+// Selection
+::selection {
+  background-color: $color-primary-light;
+  color: $color-dark;
+}
+
+::-moz-selection {
+  background-color: $color-primary-light;
+  color: $color-dark;
+}
+
+// Focus visible (for keyboard navigation)
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+// Utility classes
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: $color-text-light;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

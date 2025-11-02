@@ -1,0 +1,46 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO and Social Meta Tags (enhanced by jekyll-seo-tag plugin) -->
+  {% seo %}
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <!-- RSS Feed -->
+  {% feed_meta %}
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+  <!-- Preconnect for performance (if using external resources) -->
+  {% if page.math %}
+  <!-- Math rendering will be configured by Math Rendering Agent -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  {% endif %}
+
+  <!-- Theme Color for mobile browsers -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Language -->
+  <meta http-equiv="content-language" content="{{ site.lang | default: 'en' }}">
+
+  <!-- Additional meta tags from config -->
+  {% if site.google_analytics %}
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+  </script>
+  {% endif %}
+</head>

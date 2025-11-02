@@ -1,0 +1,45 @@
+<!-- Reusable Post Card Component -->
+<!-- Usage: {% include post-card.html post=post %} -->
+
+{% assign post = include.post %}
+
+<article class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </h3>
+  </div>
+
+  <div class="card-body">
+    <div class="post-meta">
+      <span class="meta-item">
+        <time datetime="{{ post.date | date_to_xmlschema }}">
+          {{ post.date | date: "%B %-d, %Y" }}
+        </time>
+      </span>
+
+      {% if post.author %}
+      <span class="meta-separator">•</span>
+      <span class="meta-item">{{ post.author }}</span>
+      {% endif %}
+    </div>
+
+    {% if post.excerpt %}
+    <div class="post-excerpt">
+      {{ post.excerpt | strip_html | truncatewords: 30 }}
+    </div>
+    {% endif %}
+
+    {% if post.tags.size > 0 %}
+    <div class="tag-list">
+      {% for tag in post.tags limit: 3 %}
+        <a href="{{ site.baseurl }}/tags/#{{ tag | slugify }}" class="tag">{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="card-footer">
+    <a href="{{ post.url | relative_url }}" class="read-more">Read more</a>
+  </div>
+</article>

@@ -1,0 +1,68 @@
+# Jekyll build artifacts
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler
+.bundle/
+vendor/
+
+# Ruby
+*.gem
+*.rbc
+.config
+coverage/
+InstalledFiles
+lib/bundler/man/
+pkg/
+rdoc/
+spec/reports/
+test/tmp/
+test/version_tmp/
+tmp/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment
+.env
+.env.local
+
+# Log files
+*.log
+
+# Node modules (if using npm/yarn)
+node_modules/
+
+# Backup files
+*.bak
+*.backup
+
+# GitHub Actions
+.github/workflows/*.log
+
+# Temporary build files
+.jekyll-cache/
+*.pid
+*.seed
+*.pid.lock

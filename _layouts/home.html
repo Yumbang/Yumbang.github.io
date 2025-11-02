@@ -1,0 +1,107 @@
+---
+layout: default
+---
+
+<div class="home">
+  {% if page.title %}
+  <header class="page-header">
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.description %}
+    <p class="page-description">{{ page.description }}</p>
+    {% endif %}
+  </header>
+  {% endif %}
+
+  {{ content }}
+
+  {% if site.posts.size > 0 %}
+  <section class="posts">
+    <h2 class="posts-heading">Recent Posts</h2>
+
+    <ul class="post-list">
+      {% for post in site.posts limit: 10 %}
+      <li class="post-list-item">
+        <article>
+          <h3 class="post-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h3>
+
+          <div class="post-meta">
+            <span class="meta-item">
+              <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%B %-d, %Y" }}
+              </time>
+            </span>
+
+            {% if post.author %}
+            <span class="meta-separator">•</span>
+            <span class="meta-item">{{ post.author }}</span>
+            {% endif %}
+
+            {% if post.categories.size > 0 %}
+            <span class="meta-separator">•</span>
+            <span class="meta-item">
+              {% for category in post.categories %}
+                <a href="{{ site.baseurl }}/categories/#{{ category | slugify }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </span>
+            {% endif %}
+          </div>
+
+          {% if post.tags.size > 0 %}
+          <div class="tag-list">
+            {% for tag in post.tags %}
+              <a href="{{ site.baseurl }}/tags/#{{ tag | slugify }}" class="tag">{{ tag }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if post.excerpt and site.defaults[0].values.show_excerpts %}
+          <div class="post-excerpt">
+            {{ post.excerpt }}
+          </div>
+          {% endif %}
+
+          <a href="{{ post.url | relative_url }}" class="read-more">Read more</a>
+        </article>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% if site.posts.size > 10 %}
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="{{ '/archive/' | relative_url }}" class="btn btn-primary">View All Posts</a>
+    </div>
+    {% endif %}
+  </section>
+  {% else %}
+  <p class="text-center text-muted">No posts yet.</p>
+  {% endif %}
+
+  <!-- Optional: Pagination (if jekyll-paginate is configured) -->
+  {% if paginator %}
+  <nav class="pagination" aria-label="Page navigation">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}" class="page-link">← Previous</a>
+    {% else %}
+      <span class="page-link disabled">← Previous</span>
+    {% endif %}
+
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <span class="page-link active">{{ page }}</span>
+      {% elsif page == 1 %}
+        <a href="{{ '/' | relative_url }}" class="page-link">{{ page }}</a>
+      {% else %}
+        <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="page-link">{{ page }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}" class="page-link">Next →</a>
+    {% else %}
+      <span class="page-link disabled">Next →</span>
+    {% endif %}
+  </nav>
+  {% endif %}
+</div>

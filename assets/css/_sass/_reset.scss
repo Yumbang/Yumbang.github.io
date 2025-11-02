@@ -1,0 +1,166 @@
+// Modern CSS Reset
+// Based on modern-normalize and custom additions
+
+// Box sizing reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Remove default margin and padding
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// Prevent font size inflation
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+// Set core body defaults
+body {
+  min-height: 100vh;
+  line-height: $line-height-base;
+}
+
+// Set shorter line heights on headings
+h1, h2, h3, h4, h5, h6 {
+  line-height: $line-height-heading;
+  font-weight: $font-weight-bold;
+}
+
+// Balance text wrapping on headings
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+// Improve readability for paragraphs
+p {
+  text-wrap: pretty;
+  max-width: 75ch;
+}
+
+// Remove list styles
+ul, ol {
+  list-style: none;
+}
+
+// Make images easier to work with
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Inherit fonts for inputs and buttons
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Remove button styles
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+// Avoid text overflows
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+// Create a root stacking context
+#root,
+#__next {
+  isolation: isolate;
+}
+
+// Improve table defaults
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// Remove default quotes
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: '';
+  content: none;
+}
+
+// Better link defaults
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Address styling for abbr elements
+abbr[title] {
+  text-decoration: underline dotted;
+}
+
+// Correct font weight for b and strong elements
+b,
+strong {
+  font-weight: $font-weight-bold;
+}
+
+// Monospace font for code elements
+code,
+kbd,
+samp,
+pre {
+  font-family: $font-mono;
+  font-size: 1em;
+}
+
+// Prevent sub and sup from affecting line height
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+// Remove border on images inside links
+img {
+  border-style: none;
+}
+
+// Add cursor pointer to summary elements
+summary {
+  cursor: pointer;
+}
+
+// Ensure hidden attribute works
+[hidden] {
+  display: none !important;
+}

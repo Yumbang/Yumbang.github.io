@@ -1,0 +1,438 @@
+// Layout Components
+
+// Container
+.container {
+  max-width: $max-width-content;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @media (min-width: $breakpoint-md) {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.container-narrow {
+  max-width: $max-width-narrow;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+// Site wrapper
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Main content area
+.site-main {
+  flex: 1;
+  padding: $spacing-xl 0;
+
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-3xl 0;
+  }
+}
+
+// Header
+.site-header {
+  padding: $spacing-lg 0;
+  border-bottom: 1px solid $color-border;
+  background-color: $color-background;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.9);
+
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-xl 0;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+}
+
+.site-title {
+  font-size: $font-size-h3;
+  font-weight: $font-weight-bold;
+  color: $color-dark;
+  margin: 0;
+
+  a {
+    text-decoration: none;
+    color: $color-dark;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 2px solid $color-primary;
+      outline-offset: 4px;
+      border-radius: $border-radius-sm;
+    }
+  }
+}
+
+// Navigation
+.site-nav {
+  ul {
+    display: flex;
+    gap: $spacing-md;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+
+    @media (min-width: $breakpoint-md) {
+      gap: $spacing-lg;
+    }
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    font-family: $font-primary;
+    font-weight: $font-weight-medium;
+    color: $color-text-light;
+    text-decoration: none;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-sm;
+    transition: all $transition-fast;
+    display: inline-block;
+
+    &:hover,
+    &.active {
+      color: $color-primary;
+      background-color: rgba($color-primary, 0.1);
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Footer
+.site-footer {
+  padding: $spacing-2xl 0 $spacing-xl;
+  border-top: 1px solid $color-border;
+  background-color: $color-background-alt;
+  margin-top: auto;
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    text-align: center;
+
+    @media (min-width: $breakpoint-md) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+  }
+
+  .footer-text {
+    font-size: $font-size-small;
+    color: $color-text-light;
+    margin: 0;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: $spacing-lg;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    a {
+      font-size: $font-size-small;
+      color: $color-text-light;
+      text-decoration: none;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+// Post list
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .post-list-item {
+    margin-bottom: $spacing-3xl;
+    padding-bottom: $spacing-2xl;
+    border-bottom: 1px solid $color-border;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+// Post header (for single post pages)
+.post-header {
+  margin-bottom: $spacing-2xl;
+
+  .post-title {
+    margin-top: 0;
+    margin-bottom: $spacing-md;
+  }
+}
+
+// Post metadata
+.post-meta {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: $font-primary;
+  font-size: $font-size-small;
+  color: $color-text-light;
+  margin-bottom: $spacing-md;
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  .meta-separator {
+    color: $color-gray-400;
+  }
+
+  a {
+    color: $color-text-light;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+// Post content
+.post-content {
+  margin-top: $spacing-2xl;
+
+  // First paragraph lead style (optional)
+  > p:first-of-type {
+    font-size: $font-size-large;
+    line-height: $line-height-base;
+  }
+}
+
+// Post excerpt
+.post-excerpt {
+  color: $color-text-light;
+  margin-top: $spacing-md;
+  line-height: $line-height-base;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Read more link
+.read-more {
+  display: inline-block;
+  margin-top: $spacing-md;
+  font-family: $font-primary;
+  font-weight: $font-weight-medium;
+  color: $color-primary;
+  text-decoration: none;
+
+  &::after {
+    content: " →";
+    transition: transform $transition-fast;
+    display: inline-block;
+  }
+
+  &:hover {
+    color: $color-primary-dark;
+
+    &::after {
+      transform: translateX(4px);
+    }
+  }
+}
+
+// Post navigation (previous/next)
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  margin-top: $spacing-3xl;
+  padding-top: $spacing-2xl;
+  border-top: 1px solid $color-border;
+
+  .nav-link {
+    flex: 1;
+    padding: $spacing-lg;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    text-decoration: none;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $color-primary;
+      box-shadow: $shadow-sm;
+    }
+
+    &.nav-prev {
+      text-align: left;
+    }
+
+    &.nav-next {
+      text-align: right;
+    }
+  }
+
+  .nav-label {
+    display: block;
+    font-size: $font-size-small;
+    color: $color-text-light;
+    margin-bottom: $spacing-xs;
+  }
+
+  .nav-title {
+    display: block;
+    font-weight: $font-weight-semibold;
+    color: $color-dark;
+  }
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: $spacing-3xl;
+  font-family: $font-primary;
+
+  .page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    color: $color-text;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    transition: all $transition-fast;
+
+    &:hover:not(.active):not(.disabled) {
+      background-color: $color-gray-100;
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+
+    &.active {
+      background-color: $color-primary;
+      border-color: $color-primary;
+      color: white;
+      cursor: default;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Page header (for static pages)
+.page-header {
+  margin-bottom: $spacing-2xl;
+
+  .page-title {
+    margin-top: 0;
+    margin-bottom: $spacing-md;
+  }
+
+  .page-description {
+    font-size: $font-size-large;
+    color: $color-text-light;
+    margin: 0;
+  }
+}
+
+// Archive/Category layout
+.archive-group {
+  margin-bottom: $spacing-3xl;
+
+  .archive-year {
+    font-size: $font-size-h2;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-lg;
+    color: $color-dark;
+  }
+
+  .archive-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .archive-item {
+      margin-bottom: $spacing-lg;
+      padding-left: $spacing-xl;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.5em;
+        width: 8px;
+        height: 8px;
+        background-color: $color-primary;
+        border-radius: 50%;
+      }
+
+      .archive-date {
+        font-size: $font-size-small;
+        color: $color-text-light;
+        margin-right: $spacing-md;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-sm) {
+  .site-header .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-nav ul {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .post-navigation {
+    flex-direction: column;
+  }
+}

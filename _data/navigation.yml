@@ -1,0 +1,19 @@
+# Main Navigation Menu
+# Add or remove items as needed
+# The 'url' should match the permalink of the page
+
+- title: Home
+  url: /
+
+- title: About
+  url: /about/
+
+- title: Archive
+  url: /archive/
+
+# Example: Add more navigation items
+# - title: Projects
+#   url: /projects/
+#
+# - title: Contact
+#   url: /contact/

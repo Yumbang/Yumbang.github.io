@@ -1,0 +1,130 @@
+# Site Settings
+# These are the basic metadata settings for your blog
+title: "My Blog"
+description: "A personal blog powered by Jekyll and GitHub Pages"
+author: "Your Name"
+email: your-email@example.com
+
+# URLs
+# For username.github.io repo: leave baseurl empty
+# For project repo (e.g., blog): set baseurl to "/blog"
+url: "https://username.github.io"
+baseurl: ""  # Change to "/blog" if using a project repository
+
+# Build Settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# Kramdown Configuration
+# Kramdown is the markdown processor for Jekyll
+kramdown:
+  input: GFM  # GitHub Flavored Markdown
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+    span:
+      line_numbers: false
+  # Math engine configuration for MathJax 3
+  # Note: MathJax is loaded via _includes/math.html for better control
+  # Kramdown will preserve $$ delimiters for MathJax to process
+  math_engine: mathjax
+  math_engine_opts:
+    preview: true
+    preview_as_code: true
+
+# Plugins
+# All plugins listed here are GitHub Pages compatible
+plugins:
+  - jekyll-feed        # Generates RSS feed
+  - jekyll-seo-tag     # Adds SEO meta tags
+  - jekyll-sitemap     # Generates sitemap.xml
+
+# Pagination
+# Note: jekyll-paginate is GitHub Pages compatible but limited
+# For more features, use jekyll-paginate-v2 with GitHub Actions
+paginate: 10
+paginate_path: "/page:num/"
+
+# Output Settings
+timezone: America/New_York  # Change to your timezone
+encoding: utf-8
+lang: en
+
+# Liquid Options
+# Strict rendering helps catch errors during development
+liquid:
+  error_mode: warn
+  strict_filters: false
+  strict_variables: false
+
+# Reading Files
+include:
+  - _pages
+  - .htaccess
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .agents/
+  - CLAUDE.md
+  - README.md
+  - LICENSE
+  - .gitignore
+  - .git/
+
+# Keep files that shouldn't be cleaned during build
+keep_files:
+  - .git
+  - .svn
+
+# Collections
+# Uncomment and configure if you need custom collections
+# collections:
+#   projects:
+#     output: true
+#     permalink: /projects/:path/
+
+# Defaults
+# These apply default front matter to posts and pages
+defaults:
+  # Posts
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      math: false        # Set to true for posts with mathematical equations
+      comments: true     # Enable if you add a commenting system later
+      author: "Your Name"
+      show_excerpts: true
+  # Pages
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# SEO Settings (used by jekyll-seo-tag)
+social:
+  name: Your Name
+  links:
+    - https://twitter.com/username
+    - https://github.com/username
+    # Add other social profiles
+
+# Google Analytics (optional - add when ready)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Disqus Comments (optional - add when ready)
+# disqus:
+#   shortname: your-disqus-shortname
+
+# Site Footer
+footer_text: "Copyright 2025. All rights reserved."

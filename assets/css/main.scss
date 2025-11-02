@@ -1,0 +1,22 @@
+---
+# Only the main Sass file needs front matter (the dashes are needed)
+---
+
+// Import order is important:
+// 1. Variables (used by all other files)
+// 2. Reset (clean slate)
+// 3. Base styles (typography, elements)
+// 4. Layout (structure)
+// 5. Components (reusable UI)
+// 6. Syntax highlighting
+
+@import "variables";
+@import "reset";
+@import "base";
+@import "layout";
+@import "components";
+@import "syntax";
+
+// Math rendering placeholder
+// The Math Rendering Agent will add math-specific styles here
+// when MathJax or KaTeX is configured

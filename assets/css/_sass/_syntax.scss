@@ -1,0 +1,281 @@
+// Syntax Highlighting Styles for Rouge
+// GitHub-inspired color scheme with good accessibility
+
+.highlight {
+  margin: $spacing-xl 0;
+  padding: $spacing-lg;
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: $border-radius-md;
+  overflow-x: auto;
+  font-size: $font-size-small;
+  line-height: $line-height-tight;
+
+  // Override inline code styles within highlight blocks
+  code {
+    padding: 0;
+    background: none;
+    border: none;
+    color: #24292e;
+  }
+
+  pre {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    overflow: visible;
+  }
+}
+
+// Rouge syntax highlighting classes
+.highlight {
+  // Comments
+  .c,     // Comment
+  .cm,    // Comment.Multiline
+  .cp,    // Comment.Preproc
+  .c1,    // Comment.Single
+  .cs {   // Comment.Special
+    color: #6a737d;
+    font-style: italic;
+  }
+
+  // Errors
+  .err {
+    color: #cb2431;
+    background-color: #ffdce0;
+  }
+
+  // Keywords
+  .k,     // Keyword
+  .kc,    // Keyword.Constant
+  .kd,    // Keyword.Declaration
+  .kn,    // Keyword.Namespace
+  .kp,    // Keyword.Pseudo
+  .kr,    // Keyword.Reserved
+  .kt {   // Keyword.Type
+    color: #d73a49;
+    font-weight: $font-weight-semibold;
+  }
+
+  // Operators
+  .o,     // Operator
+  .ow {   // Operator.Word
+    color: #d73a49;
+  }
+
+  // Punctuation
+  .p {    // Punctuation
+    color: #24292e;
+  }
+
+  // Names
+  .n,     // Name
+  .nb,    // Name.Builtin
+  .bp {   // Name.Builtin.Pseudo
+    color: #24292e;
+  }
+
+  // Functions and methods
+  .nf,    // Name.Function
+  .fm {   // Name.Function.Magic
+    color: #6f42c1;
+    font-weight: $font-weight-semibold;
+  }
+
+  // Classes
+  .nc,    // Name.Class
+  .nn {   // Name.Namespace
+    color: #6f42c1;
+    font-weight: $font-weight-bold;
+  }
+
+  // Variables
+  .nv,    // Name.Variable
+  .vc,    // Name.Variable.Class
+  .vg,    // Name.Variable.Global
+  .vi {   // Name.Variable.Instance
+    color: #e36209;
+  }
+
+  // Constants
+  .no,    // Name.Constant
+  .ni {   // Name.Entity
+    color: #005cc5;
+    font-weight: $font-weight-semibold;
+  }
+
+  // Decorators
+  .nd,    // Name.Decorator
+  .na {   // Name.Attribute
+    color: #22863a;
+  }
+
+  // Tags (HTML/XML)
+  .nt {   // Name.Tag
+    color: #22863a;
+    font-weight: $font-weight-semibold;
+  }
+
+  // Properties
+  .py {   // Name.Property
+    color: #005cc5;
+  }
+
+  // Strings
+  .s,     // String
+  .sb,    // String.Backtick
+  .sc,    // String.Char
+  .sd,    // String.Doc
+  .s2,    // String.Double
+  .se,    // String.Escape
+  .sh,    // String.Heredoc
+  .si,    // String.Interpol
+  .sx,    // String.Other
+  .sr,    // String.Regex
+  .s1,    // String.Single
+  .ss {   // String.Symbol
+    color: #032f62;
+  }
+
+  // Numbers
+  .m,     // Number
+  .mb,    // Number.Bin
+  .mf,    // Number.Float
+  .mh,    // Number.Hex
+  .mi,    // Number.Integer
+  .il,    // Number.Integer.Long
+  .mo {   // Number.Oct
+    color: #005cc5;
+  }
+
+  // Generic (diffs, etc.)
+  .gd {   // Generic.Deleted
+    color: #cb2431;
+    background-color: #ffeef0;
+  }
+
+  .gi {   // Generic.Inserted
+    color: #22863a;
+    background-color: #f0fff4;
+  }
+
+  .ge {   // Generic.Emph
+    font-style: italic;
+  }
+
+  .gs {   // Generic.Strong
+    font-weight: $font-weight-bold;
+  }
+
+  .gu {   // Generic.Subheading
+    color: #6f42c1;
+    font-weight: $font-weight-bold;
+  }
+
+  .gh {   // Generic.Heading
+    color: #005cc5;
+    font-weight: $font-weight-bold;
+  }
+
+  .go {   // Generic.Output
+    color: #6a737d;
+  }
+
+  .gp {   // Generic.Prompt
+    color: #005cc5;
+    font-weight: $font-weight-semibold;
+  }
+
+  .gr {   // Generic.Error
+    color: #cb2431;
+  }
+
+  .gt {   // Generic.Traceback
+    color: #cb2431;
+  }
+}
+
+// Language labels (optional - can be added via JavaScript or plugin)
+.highlight[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-tiny;
+  font-family: $font-primary;
+  font-weight: $font-weight-medium;
+  color: $color-text-light;
+  background-color: $color-gray-200;
+  border-bottom-left-radius: $border-radius-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// Add relative positioning to highlight blocks for absolute positioning of labels
+.highlight[data-lang] {
+  position: relative;
+  padding-top: $spacing-xl;
+}
+
+// Line numbers (if enabled in kramdown)
+.highlight .lineno {
+  color: $color-gray-400;
+  user-select: none;
+  padding-right: $spacing-md;
+  border-right: 1px solid $color-border;
+  margin-right: $spacing-md;
+}
+
+// Inline code (not in highlight blocks)
+:not(.highlight) > code {
+  background-color: $color-code-bg;
+  border: 1px solid $color-code-border;
+  color: $color-code-text;
+  padding: 0.125rem 0.375rem;
+  border-radius: $border-radius-sm;
+  font-size: 0.9em;
+  font-weight: $font-weight-normal;
+}
+
+// Code block wrapper (for copy button, etc.)
+.code-block {
+  position: relative;
+  margin: $spacing-xl 0;
+
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background-color: $color-gray-200;
+    border: 1px solid $color-code-border;
+    border-bottom: none;
+    border-radius: $border-radius-md $border-radius-md 0 0;
+    font-size: $font-size-small;
+    color: $color-text-light;
+  }
+
+  .highlight,
+  pre {
+    margin: 0;
+    border-radius: 0 0 $border-radius-md $border-radius-md;
+  }
+
+  // If code-header exists, adjust highlight border
+  .code-header + .highlight,
+  .code-header + pre {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+// Responsive code blocks
+@media (max-width: $breakpoint-sm) {
+  .highlight,
+  pre {
+    font-size: 0.8rem;
+    padding: $spacing-md;
+  }
+}
