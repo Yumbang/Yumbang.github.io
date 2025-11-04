@@ -1,0 +1,217 @@
+// ============================================================================
+// CSS Custom Properties for Theme System
+// ============================================================================
+// This file defines both light and dark themes using CSS custom properties.
+// The theme can be toggled via data-theme attribute on the <html> element.
+
+// Color Definitions (Static Sass Variables)
+// These are base color values that don't change between themes
+// Primary colors for branding
+$color-primary: #2563eb;
+$color-primary-dark: #1e40af;
+$color-primary-light: #60a5fa;
+
+// Accent colors
+$color-accent: #0ea5e9;
+$color-success: #10b981;
+$color-warning: #f59e0b;
+$color-error: #ef4444;
+
+// Light theme palette
+$light-bg: #ffffff;
+$light-bg-alt: #f8fafc;
+$light-text: #1e293b;
+$light-text-light: #64748b;
+$light-border: #e2e8f0;
+$light-gray-100: #f1f5f9;
+$light-gray-200: #e2e8f0;
+$light-gray-300: #cbd5e1;
+$light-code-bg: #f6f8fa;
+$light-code-border: #e1e4e8;
+$light-code-text: #24292e;
+
+// Dark theme palette
+$dark-bg: #0f172a;        // Dark blue-gray background
+$dark-bg-alt: #1e293b;    // Slightly lighter for contrast
+$dark-text: #f1f5f9;      // Light text
+$dark-text-light: #94a3b8; // Muted text
+$dark-border: #334155;    // Subtle borders
+$dark-gray-100: #1e293b;
+$dark-gray-200: #334155;
+$dark-gray-300: #475569;
+$dark-code-bg: #1e293b;
+$dark-code-border: #334155;
+$dark-code-text: #e2e8f0;
+
+// ============================================================================
+// CSS Custom Properties (Theme Variables)
+// ============================================================================
+:root {
+  // Light theme (default)
+  --color-background: #{$light-bg};
+  --color-background-alt: #{$light-bg-alt};
+  --color-text: #{$light-text};
+  --color-text-light: #{$light-text-light};
+  --color-border: #{$light-border};
+  --color-gray-100: #{$light-gray-100};
+  --color-gray-200: #{$light-gray-200};
+  --color-gray-300: #{$light-gray-300};
+  --color-code-bg: #{$light-code-bg};
+  --color-code-border: #{$light-code-border};
+  --color-code-text: #{$light-code-text};
+
+  // Brand colors (same in both themes)
+  --color-primary: #{$color-primary};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-light: #{$color-primary-light};
+  --color-accent: #{$color-accent};
+  --color-success: #{$color-success};
+  --color-warning: #{$color-warning};
+  --color-error: #{$color-error};
+
+  // Shadow system
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+// Dark theme
+[data-theme="dark"] {
+  --color-background: #{$dark-bg};
+  --color-background-alt: #{$dark-bg-alt};
+  --color-text: #{$dark-text};
+  --color-text-light: #{$dark-text-light};
+  --color-border: #{$dark-border};
+  --color-gray-100: #{$dark-gray-100};
+  --color-gray-200: #{$dark-gray-200};
+  --color-gray-300: #{$dark-gray-300};
+  --color-code-bg: #{$dark-code-bg};
+  --color-code-border: #{$dark-code-border};
+  --color-code-text: #{$dark-code-text};
+
+  // Adjusted shadows for dark mode (lighter, more subtle)
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+}
+
+// System preference (fallback)
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-background: #{$dark-bg};
+    --color-background-alt: #{$dark-bg-alt};
+    --color-text: #{$dark-text};
+    --color-text-light: #{$dark-text-light};
+    --color-border: #{$dark-border};
+    --color-gray-100: #{$dark-gray-100};
+    --color-gray-200: #{$dark-gray-200};
+    --color-gray-300: #{$dark-gray-300};
+    --color-code-bg: #{$dark-code-bg};
+    --color-code-border: #{$dark-code-border};
+    --color-code-text: #{$dark-code-text};
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// ============================================================================
+// Legacy Sass Variables (for backwards compatibility)
+// ============================================================================
+// These use CSS custom properties so they adapt to the theme
+$color-background: var(--color-background);
+$color-background-alt: var(--color-background-alt);
+$color-text: var(--color-text);
+$color-text-light: var(--color-text-light);
+$color-border: var(--color-border);
+$color-gray-100: var(--color-gray-100);
+$color-gray-200: var(--color-gray-200);
+$color-gray-300: var(--color-gray-300);
+$color-code-bg: var(--color-code-bg);
+$color-code-border: var(--color-code-border);
+$color-code-text: var(--color-code-text);
+
+// Static colors (don't change with theme)
+$color-dark: #1e293b;
+$color-light: #f8fafc;
+$color-gray-400: #94a3b8;
+$color-gray-500: #64748b;
+$color-gray-600: #475569;
+$color-gray-700: #334155;
+
+// Typography
+// System font stack for fast loading and native feel
+$font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+// Font sizes (mobile-first)
+$font-size-base: 16px;
+$font-size-small: 0.875rem;
+$font-size-tiny: 0.75rem;
+$font-size-large: 1.125rem;
+
+// Heading sizes (fluid typography)
+$font-size-h1: 2rem;     // 32px
+$font-size-h2: 1.75rem;  // 28px
+$font-size-h3: 1.5rem;   // 24px
+$font-size-h4: 1.25rem;  // 20px
+$font-size-h5: 1.125rem; // 18px
+$font-size-h6: 1rem;     // 16px
+
+// Line heights
+$line-height-base: 1.7;
+$line-height-heading: 1.3;
+$line-height-tight: 1.4;
+
+// Font weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing Scale
+// Based on 8px base unit for consistency
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+
+// Layout
+$max-width-content: 1000px;  // Increased from 800px for better screen utilization
+$max-width-narrow: 800px;    // Increased from 680px (previous content width)
+$max-width-wide: 1200px;
+
+// Responsive breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Borders
+$border-radius-sm: 0.25rem;  // 4px
+$border-radius-md: 0.5rem;   // 8px
+$border-radius-lg: 0.75rem;  // 12px
+$border-width: 1px;
+
+// Shadows (use CSS custom properties)
+$shadow-sm: var(--shadow-sm);
+$shadow-md: var(--shadow-md);
+$shadow-lg: var(--shadow-lg);
+
+// Transitions
+$transition-fast: 150ms ease-in-out;
+$transition-base: 250ms ease-in-out;
+$transition-slow: 350ms ease-in-out;
+
+// Z-index layers
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal: 1040;
+$z-index-popover: 1050;
+$z-index-tooltip: 1060;

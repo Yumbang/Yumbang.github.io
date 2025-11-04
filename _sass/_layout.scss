@@ -43,7 +43,6 @@
   top: 0;
   z-index: $z-index-sticky;
   backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.9);
 
   @media (min-width: $breakpoint-md) {
     padding: $spacing-xl 0;
@@ -55,17 +54,23 @@
     align-items: center;
     gap: $spacing-lg;
   }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
 }
 
 .site-title {
   font-size: $font-size-h3;
   font-weight: $font-weight-bold;
-  color: $color-dark;
+  color: var(--color-text);
   margin: 0;
 
   a {
     text-decoration: none;
-    color: $color-dark;
+    color: var(--color-text);
     transition: color $transition-fast;
 
     &:hover {
@@ -316,7 +321,7 @@
   .nav-title {
     display: block;
     font-weight: $font-weight-semibold;
-    color: $color-dark;
+    color: var(--color-text);
   }
 }
 
@@ -387,7 +392,7 @@
     font-size: $font-size-h2;
     font-weight: $font-weight-bold;
     margin-bottom: $spacing-lg;
-    color: $color-dark;
+    color: var(--color-text);
   }
 
   .archive-list {

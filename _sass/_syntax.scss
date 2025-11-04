@@ -1,11 +1,12 @@
 // Syntax Highlighting Styles for Rouge
 // GitHub-inspired color scheme with good accessibility
+// Includes both light and dark mode support
 
 .highlight {
   margin: $spacing-xl 0;
   padding: $spacing-lg;
-  background-color: #f6f8fa;
-  border: 1px solid #e1e4e8;
+  background-color: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
   border-radius: $border-radius-md;
   overflow-x: auto;
   font-size: $font-size-small;
@@ -16,7 +17,7 @@
     padding: 0;
     background: none;
     border: none;
-    color: #24292e;
+    color: var(--color-code-text);
   }
 
   pre {
@@ -277,5 +278,146 @@
   pre {
     font-size: 0.8rem;
     padding: $spacing-md;
+  }
+}
+
+// ============================================================================
+// Dark Mode Syntax Highlighting
+// ============================================================================
+// GitHub Dark Dimmed inspired color scheme for dark mode
+
+[data-theme="dark"] {
+  .highlight {
+    // Comments
+    .c, .cm, .cp, .c1, .cs {
+      color: #768390;
+    }
+
+    // Errors
+    .err {
+      color: #f47067;
+      background-color: rgba(244, 112, 103, 0.15);
+    }
+
+    // Keywords
+    .k, .kc, .kd, .kn, .kp, .kr, .kt {
+      color: #ff7b72;
+    }
+
+    // Operators
+    .o, .ow {
+      color: #ff7b72;
+    }
+
+    // Punctuation
+    .p {
+      color: #adbac7;
+    }
+
+    // Names
+    .n, .nb, .bp {
+      color: #adbac7;
+    }
+
+    // Functions and methods
+    .nf, .fm {
+      color: #dcbdfb;
+    }
+
+    // Classes
+    .nc, .nn {
+      color: #dcbdfb;
+    }
+
+    // Variables
+    .nv, .vc, .vg, .vi {
+      color: #f69d50;
+    }
+
+    // Constants
+    .no, .ni {
+      color: #6cb6ff;
+    }
+
+    // Decorators
+    .nd, .na {
+      color: #96d0ff;
+    }
+
+    // Tags (HTML/XML)
+    .nt {
+      color: #8ddb8c;
+    }
+
+    // Properties
+    .py {
+      color: #6cb6ff;
+    }
+
+    // Strings
+    .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss {
+      color: #96d0ff;
+    }
+
+    // Numbers
+    .m, .mb, .mf, .mh, .mi, .il, .mo {
+      color: #6cb6ff;
+    }
+
+    // Generic (diffs, etc.)
+    .gd {
+      color: #ff7b72;
+      background-color: rgba(255, 123, 114, 0.15);
+    }
+
+    .gi {
+      color: #8ddb8c;
+      background-color: rgba(141, 219, 140, 0.15);
+    }
+
+    .gu {
+      color: #dcbdfb;
+    }
+
+    .gh {
+      color: #6cb6ff;
+    }
+
+    .go {
+      color: #768390;
+    }
+
+    .gp {
+      color: #6cb6ff;
+    }
+
+    .gr {
+      color: #ff7b72;
+    }
+
+    .gt {
+      color: #ff7b72;
+    }
+  }
+
+  // Language labels in dark mode
+  .highlight[data-lang]::before {
+    color: #768390;
+    background-color: #2d333b;
+  }
+
+  // Code block wrapper in dark mode
+  .code-block {
+    .code-header {
+      background-color: #2d333b;
+      border-color: var(--color-code-border);
+      color: #768390;
+    }
+  }
+
+  // Line numbers in dark mode
+  .highlight .lineno {
+    color: #636e7b;
+    border-right-color: var(--color-border);
   }
 }
