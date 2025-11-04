@@ -65,23 +65,22 @@
     let sectionIndex = 1;
 
     elements.forEach((element) => {
-      // Skip if already has an ID
-      if (element.id) {
-        return;
+      // Use existing ID if present, otherwise create new one
+      let sectionId = element.id;
+
+      if (!sectionId) {
+        sectionId = `section-${sectionIndex}`;
+        element.id = sectionId;
+        sectionIndex++;
       }
 
-      // Assign ID
-      const sectionId = `section-${sectionIndex}`;
-      element.id = sectionId;
       element.classList.add('citable-section');
 
       // Store in state
       state.paragraphs.set(sectionId, element);
-
-      sectionIndex++;
     });
 
-    console.log(`[Paragraph Links] Assigned IDs to ${sectionIndex - 1} sections`);
+    console.log(`[Paragraph Links] Assigned IDs to ${elements.length} sections`);
   }
 
   // ============================================================================
@@ -160,10 +159,14 @@
 
   function handleDeepLink() {
     const hash = window.location.hash;
-    if (!hash || !hash.match(/^#section-\d+$/)) return;
+    if (!hash) return;
 
     const sectionId = hash.substring(1);
-    scrollToParagraph(sectionId);
+
+    // Only handle if it's one of our tracked sections
+    if (state.paragraphs.has(sectionId)) {
+      scrollToParagraph(sectionId);
+    }
   }
 
   function scrollToParagraph(paraId) {
