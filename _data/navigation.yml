@@ -8,8 +8,17 @@
 - title: About
   url: /about/
 
+- title: CV
+  url: /cv/
+
 - title: Archive
   url: /archive/
+
+- title: Tags
+  url: /tags/
+
+- title: Categories
+  url: /categories/
 
 # Example: Add more navigation items
 # - title: Projects
