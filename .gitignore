@@ -66,3 +66,4 @@ node_modules/
 *.pid
 *.seed
 *.pid.lock
+test-*.html
