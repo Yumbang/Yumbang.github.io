@@ -24,7 +24,7 @@ layout: default
       <span class="meta-separator">•</span>
       <span class="meta-item">
         {% for category in page.categories %}
-          <a href="{{ site.baseurl }}/categories/#{{ category | slugify }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
+          <a href="{{ site.baseurl }}/categories/{{ category | slugify }}/">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
         {% endfor %}
       </span>
       {% endif %}
@@ -40,11 +40,7 @@ layout: default
     </div>
 
     {% if page.tags.size > 0 %}
-    <div class="tag-list">
-      {% for tag in page.tags %}
-        <a href="{{ site.baseurl }}/tags/#{{ tag | slugify }}" class="tag">{{ tag }}</a>
-      {% endfor %}
-    </div>
+    {% include tag-list.html tags=page.tags show_label=false %}
     {% endif %}
   </header>
 
@@ -83,21 +79,11 @@ layout: default
   </nav>
   {% endif %}
 
-  <!-- Optional: Comments section (Disqus, etc.) -->
-  {% if page.comments and site.disqus.shortname %}
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = '{{ page.url | absolute_url }}';
-      this.page.identifier = '{{ page.id }}';
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  {% endif %}
+  <!-- Comments section (GitHub-based: Utterances or Giscus) -->
+  {% include comments.html %}
 </article>
+
+<!-- Inline Comments System -->
+{% if site.inline_comments.enabled and page.inline_comments != false %}
+  <script src="{{ '/assets/js/inline-comments.js' | relative_url }}"></script>
+{% endif %}

@@ -1,0 +1,90 @@
+---
+layout: default
+---
+
+<!-- Individual Tag Page Layout -->
+<!-- This page displays all posts with a specific tag -->
+
+<div class="archive-page tag-archive">
+  <!-- Tag Header with Breadcrumb -->
+  <header class="page-header">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+        <li><a href="{{ '/tags/' | relative_url }}">Tags</a></li>
+        <li class="active" aria-current="page">{{ page.title }}</li>
+      </ul>
+    </nav>
+
+    <h1 class="page-title">
+      <span class="tag-icon" aria-hidden="true">#</span>{{ page.title }}
+    </h1>
+
+    {% if page.description %}
+    <p class="page-description">{{ page.description }}</p>
+    {% else %}
+    <p class="page-description">
+      {{ page.posts.size }} {% if page.posts.size == 1 %}post{% else %}posts{% endif %} tagged with <strong>#{{ page.title }}</strong>
+    </p>
+    {% endif %}
+  </header>
+
+  <!-- Posts with this tag -->
+  {% if page.posts.size > 0 %}
+  <section class="posts" aria-label="Posts tagged with {{ page.title }}">
+    <ul class="post-list">
+      {% for post in page.posts %}
+      <li class="post-list-item">
+        <article>
+          <h2 class="post-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h2>
+
+          <div class="post-meta">
+            <span class="meta-item">
+              <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%B %-d, %Y" }}
+              </time>
+            </span>
+
+            {% if post.author %}
+            <span class="meta-separator">•</span>
+            <span class="meta-item">{{ post.author }}</span>
+            {% endif %}
+
+            {% if post.read_time != false %}
+            <span class="meta-separator">•</span>
+            <span class="meta-item">
+              {% assign words = post.content | number_of_words %}
+              {% assign minutes = words | divided_by: 180 %}
+              {% if minutes < 1 %}1{% else %}{{ minutes }}{% endif %} min read
+            </span>
+            {% endif %}
+          </div>
+
+          <!-- Show all tags for this post, highlighting current tag -->
+          {% if post.tags.size > 0 %}
+          {% include tag-list.html tags=post.tags compact=true current_tag=page.title %}
+          {% endif %}
+
+          {% if post.excerpt %}
+          <div class="post-excerpt">
+            {{ post.excerpt }}
+          </div>
+          {% endif %}
+
+          <a href="{{ post.url | relative_url }}" class="read-more">Read more</a>
+        </article>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% else %}
+  <p class="text-center text-muted">No posts found with this tag.</p>
+  {% endif %}
+
+  <!-- Navigation -->
+  <div class="archive-navigation">
+    <a href="{{ '/tags/' | relative_url }}" class="btn btn-secondary">← View All Tags</a>
+  </div>
+</div>

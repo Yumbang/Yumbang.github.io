@@ -10,12 +10,14 @@ gem "jekyll-sass-converter", "~> 2.2"
 gem "webrick", "~> 1.8"
 
 # Jekyll Plugins
-# All plugins in this group are GitHub Pages compatible
+# Note: jekyll-archives is NOT GitHub Pages compatible in basic mode
+# But it works fine with GitHub Actions deployment
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.17"       # RSS feed generation
   gem "jekyll-seo-tag", "~> 2.8"     # SEO meta tags
   gem "jekyll-sitemap", "~> 1.4"     # Sitemap generation
   gem "jekyll-paginate", "~> 1.1"    # Basic pagination
+  gem "jekyll-archives", "~> 2.2"    # Auto-generate tag/category pages
 end
 
 # Performance and Development

@@ -1,0 +1,35 @@
+{%- comment -%}
+Tag List Component
+Usage: {% include tag-list.html tags=page.tags %}
+Parameters:
+  - tags (required): Array of tag names
+  - compact (optional): Boolean for compact styling
+  - limit (optional): Number - limit tags displayed
+  - show_label (optional): Boolean - show "Tags:" label
+  - current_tag (optional): String - mark this tag as active
+{%- endcomment -%}
+
+{%- assign tag_items = include.tags -%}
+
+{%- if tag_items and tag_items.size > 0 -%}
+<div class="tag-list{% if include.compact %} tag-list-compact{% endif %}" role="list" aria-label="Post tags">
+  {%- if include.show_label -%}
+  <span class="tag-list-label">Tags:</span>
+  {%- endif -%}
+
+  {%- if include.limit -%}
+    {%- for tag in tag_items limit: include.limit -%}
+    <a href="{{ site.baseurl }}/tags/{{ tag | slugify }}/" class="tag{% if include.current_tag == tag %} tag-active{% endif %}" role="listitem">{{ tag }}</a>
+    {%- endfor -%}
+
+    {%- assign remaining_count = tag_items.size | minus: include.limit -%}
+    {%- if remaining_count > 0 -%}
+    <span class="tag-more" aria-label="Additional tags available">+{{ remaining_count }} more</span>
+    {%- endif -%}
+  {%- else -%}
+    {%- for tag in tag_items -%}
+    <a href="{{ site.baseurl }}/tags/{{ tag | slugify }}/" class="tag{% if include.current_tag == tag %} tag-active{% endif %}" role="listitem">{{ tag }}</a>
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+{%- endif -%}
