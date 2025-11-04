@@ -36,16 +36,35 @@ kramdown:
 
 # Plugins
 # All plugins listed here are GitHub Pages compatible
+# Note: jekyll-archives requires GitHub Actions deployment (not compatible with basic GitHub Pages)
 plugins:
   - jekyll-feed        # Generates RSS feed
   - jekyll-seo-tag     # Adds SEO meta tags
   - jekyll-sitemap     # Generates sitemap.xml
+  - jekyll-archives    # Auto-generates tag and category archive pages
 
 # Pagination
 # Note: jekyll-paginate is GitHub Pages compatible but limited
 # For more features, use jekyll-paginate-v2 with GitHub Actions
 paginate: 10
 paginate_path: "/page:num/"
+
+# Jekyll Archives Configuration
+# Automatically generates archive pages for tags and categories
+jekyll-archives:
+  enabled:
+    - tags
+    - categories
+  layouts:
+    tag: tag        # Use _layouts/tag.html for tag archive pages
+    category: category  # Use _layouts/category.html for category archive pages
+  permalinks:
+    tag: '/tags/:name/'
+    category: '/categories/:name/'
+  # Slug options for clean URLs
+  slugify:
+    mode: 'pretty'  # Options: default, raw, pretty, ascii, latin
+    cased: false    # Convert to lowercase
 
 # Output Settings
 timezone: America/New_York  # Change to your timezone
@@ -122,9 +141,49 @@ social:
 # Google Analytics (optional - add when ready)
 # google_analytics: UA-XXXXXXXXX-X
 
-# Disqus Comments (optional - add when ready)
-# disqus:
-#   shortname: your-disqus-shortname
+# Comments Configuration
+# Using Giscus (GitHub Discussions-based commenting system)
+comments:
+  provider: giscus  # Options: giscus, utterances, disqus, or false to disable
+
+  # Giscus Configuration
+  # Get these values from https://giscus.app after setting up your repository
+  giscus:
+    repo: ""  # e.g., "username/blog" - Your GitHub repository in format owner/repo
+    repo_id: ""  # Get this from https://giscus.app
+    category: ""  # e.g., "Comments" - The discussion category name
+    category_id: ""  # Get this from https://giscus.app
+    mapping: "pathname"  # Options: pathname, url, title, og:title
+    strict: "0"  # Use strict title matching (1) or not (0)
+    reactions_enabled: "1"  # Enable reactions (1) or disable (0)
+    emit_metadata: "0"  # Emit discussion metadata (1) or not (0)
+    input_position: "bottom"  # Comment box position: top or bottom
+    theme: "preferred_color_scheme"  # Theme: light, dark, dark_dimmed, preferred_color_scheme, etc.
+    lang: "en"  # Language code
+    loading: "lazy"  # Loading strategy: lazy or eager
+    crossorigin: "anonymous"  # CORS setting
+
+  # Utterances Configuration (alternative to Giscus)
+  # Uncomment if you prefer Utterances over Giscus
+  # utterances:
+  #   repo: ""  # e.g., "username/blog"
+  #   issue_term: "pathname"  # Options: pathname, url, title, og:title
+  #   theme: "github-light"  # Options: github-light, github-dark, preferred-color-scheme, etc.
+  #   label: "comment"  # Issue label
+
+  # Disqus Configuration (legacy option)
+  # disqus:
+  #   shortname: your-disqus-shortname
+
+# Inline Comments Configuration
+# Paragraph-level contextual commenting system integrated with Giscus
+inline_comments:
+  enabled: true  # Set to false to disable inline commenting globally
+  provider: "giscus"  # Must match comments.provider (only giscus supported for now)
+  min_paragraph_length: 50  # Minimum characters to show comment icon
+  max_citation_length: 200  # Maximum characters shown in citation preview
+  icon_position: "left"  # Icon position in margin: left or right
+  popover_position: "right"  # Desktop popover position: right or left
 
 # Site Footer
 footer_text: "Copyright 2025. All rights reserved."

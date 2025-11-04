@@ -1,0 +1,179 @@
+<!-- Comments Section -->
+<!-- Supports Giscus, Utterances, and Disqus for commenting -->
+<!-- Enable comments by setting 'comments: true' in post front matter -->
+<!-- Configure the provider in _config.yml under 'comments.provider' -->
+<!-- Inline comments with paragraph-level metadata are styled specially -->
+
+{% if page.comments != false %}
+  {% if site.comments.provider == "utterances" and site.comments.utterances.repo %}
+
+    <div class="comments-section" id="comments">
+      <div class="comments-header">
+        <h2 class="comments-title">Comments</h2>
+        <p class="comments-subtitle">
+          Join the discussion via GitHub. Sign in with your GitHub account to leave a comment.
+        </p>
+      </div>
+
+      <div class="comments-container">
+        <script
+          src="https://utteranc.es/client.js"
+          repo="{{ site.comments.utterances.repo }}"
+          issue-term="{{ site.comments.utterances.issue_term | default: 'pathname' }}"
+          label="{{ site.comments.utterances.label | default: 'comment' }}"
+          theme="{{ site.comments.utterances.theme | default: 'github-light' }}"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </div>
+
+      <!-- Fallback message if JavaScript is disabled -->
+      <noscript>
+        <div class="comments-noscript">
+          <p>
+            Please enable JavaScript to view the comments powered by
+            <a href="https://utteranc.es/" target="_blank" rel="noopener noreferrer">Utterances</a>.
+          </p>
+        </div>
+      </noscript>
+    </div>
+
+  {% elsif site.comments.provider == "giscus" and site.comments.giscus.repo %}
+
+    <div class="comments-section" id="comments">
+      <div class="comments-header">
+        <h2 class="comments-title">Comments</h2>
+        <p class="comments-subtitle">
+          Join the discussion via GitHub. Sign in with your GitHub account to leave a comment.
+        </p>
+      </div>
+
+      <div class="comments-container">
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="{{ site.comments.giscus.repo }}"
+          data-repo-id="{{ site.comments.giscus.repo_id }}"
+          data-category="{{ site.comments.giscus.category }}"
+          data-category-id="{{ site.comments.giscus.category_id }}"
+          data-mapping="{{ site.comments.giscus.mapping | default: 'pathname' }}"
+          data-strict="{{ site.comments.giscus.strict | default: '0' }}"
+          data-reactions-enabled="{{ site.comments.giscus.reactions_enabled | default: '1' }}"
+          data-emit-metadata="{{ site.comments.giscus.emit_metadata | default: '0' }}"
+          data-input-position="{{ site.comments.giscus.input_position | default: 'bottom' }}"
+          data-theme="{{ site.comments.giscus.theme | default: 'preferred_color_scheme' }}"
+          data-lang="{{ site.comments.giscus.lang | default: 'en' }}"
+          data-loading="{{ site.comments.giscus.loading | default: 'lazy' }}"
+          crossorigin="anonymous"
+          async>
+        </script>
+
+        <!-- Inline Comments Citation Parser -->
+        {% if site.inline_comments.enabled %}
+        <script>
+          // Parse Giscus comments and render inline comment citations
+          (function() {
+            'use strict';
+
+            function parseInlineCommentCitations() {
+              // Wait for Giscus iframe to load
+              const checkGiscus = setInterval(() => {
+                const giscusFrame = document.querySelector('iframe.giscus-frame');
+                if (!giscusFrame) return;
+
+                clearInterval(checkGiscus);
+
+                // Listen for Giscus messages
+                window.addEventListener('message', (event) => {
+                  if (event.origin !== 'https://giscus.app') return;
+
+                  const giscusData = event.data;
+                  if (giscusData && giscusData.giscus && giscusData.giscus.discussion) {
+                    processGiscusComments(giscusData.giscus.discussion);
+                  }
+                });
+              }, 100);
+
+              // Timeout after 10 seconds
+              setTimeout(() => clearInterval(checkGiscus), 10000);
+            }
+
+            function processGiscusComments(discussion) {
+              if (!discussion.comments || !discussion.comments.nodes) return;
+
+              discussion.comments.nodes.forEach((comment) => {
+                // Check if this is an inline comment
+                const metadataMatch = comment.body.match(/<!-- inline-comment-metadata\n([\s\S]*?)\n-->/);
+                if (!metadataMatch) return;
+
+                try {
+                  const metadata = JSON.parse(metadataMatch[1]);
+                  const commentBody = comment.body.replace(/<!-- inline-comment-metadata[\s\S]*?-->\n\n/, '');
+
+                  // Render inline comment citation
+                  renderInlineCommentCitation(comment, metadata, commentBody);
+                } catch (e) {
+                  console.error('[Inline Comments] Error parsing citation:', e);
+                }
+              });
+            }
+
+            function renderInlineCommentCitation(comment, metadata, commentBody) {
+              // Find the comment element in Giscus (if accessible)
+              // Note: Due to iframe restrictions, we cannot modify Giscus content directly
+              // This would need to be done via a backend service or Giscus customization
+
+              // For now, we add a visual indicator that this is an inline comment
+              console.log('[Inline Comments] Found inline comment:', {
+                paragraphId: metadata.paragraphId,
+                paragraphText: metadata.paragraphText,
+                postUrl: metadata.postUrl
+              });
+            }
+
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', parseInlineCommentCitations);
+            } else {
+              parseInlineCommentCitations();
+            }
+          })();
+        </script>
+        {% endif %}
+      </div>
+
+      <!-- Fallback message if JavaScript is disabled -->
+      <noscript>
+        <div class="comments-noscript">
+          <p>
+            Please enable JavaScript to view the comments powered by
+            <a href="https://giscus.app/" target="_blank" rel="noopener noreferrer">Giscus</a>.
+          </p>
+        </div>
+      </noscript>
+    </div>
+
+  {% elsif page.comments == true %}
+
+    <!-- Comments enabled but not configured -->
+    <div class="comments-section" id="comments">
+      <div class="comments-header">
+        <h2 class="comments-title">Comments</h2>
+      </div>
+
+      <div class="comments-container">
+        <div class="alert alert-info">
+          <p>
+            <strong>Comments are not configured yet.</strong>
+            To enable comments, please configure either Utterances or Giscus in your <code>_config.yml</code> file.
+          </p>
+          <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+            Learn more:
+            <a href="https://utteranc.es/" target="_blank" rel="noopener noreferrer">Utterances</a> |
+            <a href="https://giscus.app/" target="_blank" rel="noopener noreferrer">Giscus</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  {% endif %}
+{% endif %}
