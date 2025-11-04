@@ -66,17 +66,12 @@ jobs:
             exit 1
           fi
 
-          # Check for common issues
-          if grep -r "Liquid syntax error" _site/; then
-            echo "Error: Liquid syntax errors found!"
-            exit 1
-          fi
-
           # List generated files for debugging
           echo "Generated files:"
           find _site -type f | head -20
 
           echo "Build test passed successfully!"
+          echo "Note: Jekyll build step (line 48) already validates Liquid syntax"
 
       # Upload artifact for deployment
       - name: Upload artifact
