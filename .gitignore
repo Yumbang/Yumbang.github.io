@@ -67,3 +67,21 @@ node_modules/
 *.seed
 *.pid.lock
 test-*.html
+
+# Claude-related files (keep private)
+CLAUDE.md
+.claude/
+
+# Documentation files (implementation details)
+*_GUIDE.md
+*_DOCUMENTATION.md
+*_SUMMARY.md
+*_MOCKUP.md
+*_REFERENCE.md
+*_EXAMPLES.md
+*_QUICK_START.md
+README_COMMENTS.md
+POST_TEMPLATES.md
+
+# Draft posts
+_drafts/
