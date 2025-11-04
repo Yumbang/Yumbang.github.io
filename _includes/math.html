@@ -68,10 +68,7 @@
       // Skip rendering on elements with specific classes
       skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
 
-      // Process only math in specific containers (performance)
-      processHtmlClass: 'math-enabled',
-
-      // Ignore math in these classes
+      // Ignore math in these classes (if needed)
       ignoreHtmlClass: 'no-math'
     },
 
@@ -98,12 +95,10 @@
 </script>
 
 <!-- Load MathJax 3 from CDN -->
-<!-- Using Cloudflare CDN for reliability and performance -->
+<!-- Using jsDelivr CDN for reliability and performance -->
 <!-- Async loading to prevent blocking page render -->
 <script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
-  integrity="sha384-te69Cjq9dJiG9eU5/lLN1qoRDOTWTj6dNYZKbPqmLs0r83Eo8Bc7FmLXWg/NM9kz"
-  crossorigin="anonymous">
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
 <!-- Fallback: Load from alternative CDN if primary fails -->
@@ -116,8 +111,6 @@
         var script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js';
         script.async = true;
-        script.integrity = 'sha512-9DkJEmXbL/Tdj8b1SxJ0KdMhHH3bVqN1Cc7H8NVLNVJvQFXLrNKhVGHLYwLGlBdVKPfLLrKZPnpYCkCJJLKfOQ==';
-        script.crossorigin = 'anonymous';
         document.head.appendChild(script);
       }
     }, 5000);
