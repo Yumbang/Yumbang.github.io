@@ -3,6 +3,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+  <!-- Theme Initialization (MUST be before any content to prevent FOUC) -->
+  {% include theme-init.html %}
+
   <!-- SEO and Social Meta Tags (enhanced by jekyll-seo-tag plugin) -->
   {% seo %}
 
@@ -25,8 +28,9 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   {% endif %}
 
-  <!-- Theme Color for mobile browsers -->
-  <meta name="theme-color" content="#2563eb">
+  <!-- Theme Color for mobile browsers (adapts to dark mode) -->
+  <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Language -->

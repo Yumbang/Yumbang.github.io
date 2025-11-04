@@ -1,0 +1,105 @@
+<!-- Theme Initialization Script -->
+<!-- This script MUST be in <head> before any content renders to prevent FOUC (Flash of Unstyled Content) -->
+<script>
+  (function() {
+    'use strict';
+
+    // Get stored theme preference from localStorage
+    function getStoredTheme() {
+      try {
+        return localStorage.getItem('theme');
+      } catch (e) {
+        // localStorage might not be available (privacy mode, etc.)
+        return null;
+      }
+    }
+
+    // Get system preference
+    function getSystemTheme() {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      return 'light';
+    }
+
+    // Determine which theme to use
+    // Priority: 1. localStorage (user choice), 2. system preference, 3. default to light
+    function getInitialTheme() {
+      const storedTheme = getStoredTheme();
+      if (storedTheme) {
+        return storedTheme;
+      }
+      return getSystemTheme();
+    }
+
+    // Apply theme immediately (before page renders)
+    const theme = getInitialTheme();
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // Also store it if it wasn't stored before (for system preference detection)
+    if (!getStoredTheme()) {
+      try {
+        localStorage.setItem('theme', theme);
+      } catch (e) {
+        // Fail silently if localStorage is not available
+      }
+    }
+
+    // Listen for system preference changes (when user hasn't set manual preference)
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+      // Modern browsers
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', function(e) {
+          // Only auto-update if user hasn't manually set a preference
+          if (!getStoredTheme()) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+          }
+        });
+      }
+      // Legacy browsers
+      else if (mediaQuery.addListener) {
+        mediaQuery.addListener(function(e) {
+          if (!getStoredTheme()) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+          }
+        });
+      }
+    }
+  })();
+</script>
+
+<!-- Smooth theme transitions (only after page loads to avoid FOUC) -->
+<script>
+  // Add smooth transitions after page loads
+  window.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.setProperty('--theme-transition', '200ms ease-in-out');
+  });
+</script>
+
+<!-- Optional: Add transition property to body for smooth theme switching -->
+<style>
+  /* Only apply transitions after page load to prevent FOUC */
+  html {
+    transition: background-color var(--theme-transition, 0ms), color var(--theme-transition, 0ms);
+  }
+
+  body {
+    transition: background-color var(--theme-transition, 0ms), color var(--theme-transition, 0ms);
+  }
+
+  /* Prevent FOUC: ensure background is always set */
+  html {
+    background-color: var(--color-background);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+</style>
