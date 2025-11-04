@@ -13,10 +13,9 @@
   'use strict';
 
   const CONFIG = {
-    minParagraphLength: 50,  // Minimum chars to show link icon
     selectors: {
       postContent: '.post-content',
-      citableParagraphs: 'p, blockquote'
+      citableElements: 'h2, h3, h4, h5, h6'  // Target section headings
     }
   };
 
@@ -62,27 +61,27 @@
     const postContent = document.querySelector(CONFIG.selectors.postContent);
     if (!postContent) return;
 
-    const elements = postContent.querySelectorAll(CONFIG.selectors.citableParagraphs);
-    let paraIndex = 1;
+    const elements = postContent.querySelectorAll(CONFIG.selectors.citableElements);
+    let sectionIndex = 1;
 
     elements.forEach((element) => {
-      // Skip short paragraphs
-      if (element.textContent.trim().length < CONFIG.minParagraphLength) {
+      // Skip if already has an ID
+      if (element.id) {
         return;
       }
 
       // Assign ID
-      const paraId = `p${paraIndex}`;
-      element.id = paraId;
-      element.classList.add('citable-paragraph');
+      const sectionId = `section-${sectionIndex}`;
+      element.id = sectionId;
+      element.classList.add('citable-section');
 
       // Store in state
-      state.paragraphs.set(paraId, element);
+      state.paragraphs.set(sectionId, element);
 
-      paraIndex++;
+      sectionIndex++;
     });
 
-    console.log(`[Paragraph Links] Assigned IDs to ${paraIndex - 1} paragraphs`);
+    console.log(`[Paragraph Links] Assigned IDs to ${sectionIndex - 1} sections`);
   }
 
   // ============================================================================
@@ -90,12 +89,12 @@
   // ============================================================================
 
   function addLinkIcons() {
-    state.paragraphs.forEach((paragraph, paraId) => {
+    state.paragraphs.forEach((element, elementId) => {
       // Create link icon
       const icon = document.createElement('button');
       icon.className = 'para-link-icon';
-      icon.setAttribute('aria-label', 'Copy link to this paragraph');
-      icon.setAttribute('data-para-id', paraId);
+      icon.setAttribute('aria-label', 'Copy link to this section');
+      icon.setAttribute('data-para-id', elementId);
       icon.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
           <path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"/>
@@ -106,11 +105,11 @@
       icon.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        copyParagraphLink(paraId, icon);
+        copyParagraphLink(elementId, icon);
       });
 
-      // Insert icon
-      paragraph.appendChild(icon);
+      // Insert icon at the beginning (left side)
+      element.prepend(icon);
     });
   }
 
@@ -161,10 +160,10 @@
 
   function handleDeepLink() {
     const hash = window.location.hash;
-    if (!hash || !hash.match(/^#p\d+$/)) return;
+    if (!hash || !hash.match(/^#section-\d+$/)) return;
 
-    const paraId = hash.substring(1);
-    scrollToParagraph(paraId);
+    const sectionId = hash.substring(1);
+    scrollToParagraph(sectionId);
   }
 
   function scrollToParagraph(paraId) {
