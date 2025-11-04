@@ -149,17 +149,17 @@ comments:
   # Giscus Configuration
   # Get these values from https://giscus.app after setting up your repository
   giscus:
-    repo: ""  # e.g., "username/blog" - Your GitHub repository in format owner/repo
-    repo_id: ""  # Get this from https://giscus.app
-    category: ""  # e.g., "Comments" - The discussion category name
-    category_id: ""  # Get this from https://giscus.app
+    repo: "Yumbang/Yumbang.github.io"  # Your GitHub repository in format owner/repo
+    repo_id: "R_kgDOQOtaGw"  # Get this from https://giscus.app
+    category: "General"  # The discussion category name
+    category_id: "DIC_kwDOQOtaG84CxaRx"  # Get this from https://giscus.app
     mapping: "pathname"  # Options: pathname, url, title, og:title
     strict: "0"  # Use strict title matching (1) or not (0)
     reactions_enabled: "1"  # Enable reactions (1) or disable (0)
     emit_metadata: "0"  # Emit discussion metadata (1) or not (0)
-    input_position: "bottom"  # Comment box position: top or bottom
+    input_position: "top"  # Comment box position: top or bottom
     theme: "preferred_color_scheme"  # Theme: light, dark, dark_dimmed, preferred_color_scheme, etc.
-    lang: "en"  # Language code
+    lang: "ko"  # Language code
     loading: "lazy"  # Loading strategy: lazy or eager
     crossorigin: "anonymous"  # CORS setting
 
