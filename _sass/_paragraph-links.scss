@@ -1,0 +1,155 @@
+// ============================================================================
+// Paragraph Citation Links Styling
+// ============================================================================
+// Simple YouTube-style timestamp linking for blog paragraphs
+
+// ============================================================================
+// Citable Paragraphs
+// ============================================================================
+
+.post-content {
+  .citable-paragraph {
+    position: relative;
+    transition: background-color $transition-base;
+
+    // Show link icon on hover
+    &:hover .para-link-icon {
+      opacity: 1;
+    }
+
+    // Flash highlight animation when linked to
+    &.highlight-flash {
+      animation: highlightFlash 2s ease-in-out;
+    }
+  }
+}
+
+@keyframes highlightFlash {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(37, 99, 235, 0.15);
+  }
+}
+
+// ============================================================================
+// Link Icon Button
+// ============================================================================
+
+.para-link-icon {
+  position: absolute;
+  right: 0;
+  top: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin-left: $spacing-sm;
+  background: transparent;
+  border: none;
+  color: var(--color-text-light);
+  cursor: pointer;
+  opacity: 0;
+  transition: all $transition-fast;
+  border-radius: $border-radius-sm;
+
+  &:hover {
+    color: var(--color-primary);
+    background: var(--color-gray-100);
+    transform: scale(1.1);
+  }
+
+  &:focus {
+    opacity: 1;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    flex-shrink: 0;
+    display: block;
+  }
+
+  // When copied, show checkmark
+  &.copied {
+    color: var(--color-success);
+  }
+}
+
+// ============================================================================
+// Copy Success Tooltip
+// ============================================================================
+
+.copy-tooltip {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: $spacing-xs $spacing-sm;
+  background: var(--color-text);
+  color: var(--color-background);
+  font-size: $font-size-tiny;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  border-radius: $border-radius-sm;
+  box-shadow: $shadow-md;
+  pointer-events: none;
+  animation: tooltipFadeIn $transition-base ease-out;
+
+  // Arrow pointing down
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid var(--color-text);
+  }
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// ============================================================================
+// Mobile Adjustments
+// ============================================================================
+
+@media (max-width: #{$breakpoint-md - 1px}) {
+  .para-link-icon {
+    // Always visible on mobile
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// ============================================================================
+// Print Styles
+// ============================================================================
+
+@media print {
+  .para-link-icon {
+    display: none;
+  }
+}

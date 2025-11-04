@@ -83,7 +83,5 @@ layout: default
   {% include comments.html %}
 </article>
 
-<!-- Inline Comments System -->
-{% if site.inline_comments.enabled and page.inline_comments != false %}
-  <script src="{{ '/assets/js/inline-comments.js' | relative_url }}"></script>
-{% endif %}
+<!-- Paragraph Citation Links -->
+<script src="{{ '/assets/js/paragraph-links.js' | relative_url }}"></script>
